@@ -22,7 +22,7 @@ const login = async (req, res) => {
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            sameSite: 'lax', // 'lax' allows cookies on cross-origin GET requests (needed for localhost dev)
             maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
 
