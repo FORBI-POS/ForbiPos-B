@@ -18,12 +18,14 @@ const login = async (req, res) => {
         const { username, password } = req.body;
         const { user, token } = await authService.loginUser(username, password);
 
-        res.cookie("jwt", token, {
-            httpOnly: true,
-            secure: true,           // Always secure in production
-            sameSite: "none",       // Required for cross-site cookies
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        });
+       res.cookie("jwt", token, {
+  httpOnly: true,
+  secure: true,       // MUST be true for SameSite=None on HTTPS
+  sameSite: "none",   // REQUIRED for cross-site cookie usage
+  path: "/",          // ensures cookie is accessible everywhere
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+});
+
 
         res.json({
             _id: user._id,
