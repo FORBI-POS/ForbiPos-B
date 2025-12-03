@@ -8,15 +8,26 @@ const protect = async (req, res, next) => {
         try {
             token = req.cookies.jwt;
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            req.user = await User.findById(decoded.id).select('-password');
-            next();
+
+            const user = await User.findById(decoded.id)
+                .populate("role")
+                .select("-password");
+
+            // Normalize role ALWAYS to string
+            req.user = {
+                ...user._doc,
+                role: decoded.role || user.role?.name
+            };
+
+            return next();
         } catch (error) {
-            res.status(401).json({ message: 'Not authorized, token failed' });
+            return res.status(401).json({ message: "Not authorized, token failed" });
         }
-    } else {
-        res.status(401).json({ message: 'Not authorized, no token' });
     }
+
+    res.status(401).json({ message: "Not authorized, no token" });
 };
+
 
 const authorize = (...roles) => {
     return (req, res, next) => {
