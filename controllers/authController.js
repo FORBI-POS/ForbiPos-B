@@ -18,12 +18,11 @@ const login = async (req, res) => {
         const { username, password } = req.body;
         const { user, token } = await authService.loginUser(username, password);
 
-        // Set cookie
-        res.cookie('jwt', token, {
+        res.cookie("jwt", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax', // 'lax' allows cookies on cross-origin GET requests (needed for localhost dev)
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+            secure: true,           // Always secure in production
+            sameSite: "none",       // Required for cross-site cookies
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
         res.json({
