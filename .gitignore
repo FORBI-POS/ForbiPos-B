@@ -46,3 +46,8 @@ temp/
 
 # Optional npm cache
 npm-debug.log
+
+.env.local
+.env
+.env.*
+!*.docker

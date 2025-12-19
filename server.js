@@ -11,6 +11,7 @@ const notificationService = require('./services/notificationService');
 // Connect to database
 connectDB();
 
+
 // Initialize default roles
 initializeDefaultRoles();
 
@@ -38,11 +39,8 @@ io.on('connection', (socket) => {
 
 // Middleware
 app.use(cors({
-    origin: [
-        'http://localhost:5173',
-        'http://localhost:8080',
-        'https://forbi-pos.vercel.app'
-    ], // Allow frontend origins
+    origin:process.env.CLIENT_URL,
+
     credentials: true, // Allow cookies
 }));
 app.use(express.json());
@@ -69,8 +67,10 @@ app.use('/api/payments', require('./routes/paymentRoutes'));
 app.use('/api/deleted', require('./routes/deletedItemsRoutes'));
 app.use('/api/salaries', require('./routes/salaryRoutes'));
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// server.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
+export default app;
