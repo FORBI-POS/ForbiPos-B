@@ -1,5 +1,5 @@
-const Supplier = require('../models/Supplier');
-const notificationService = require('./notificationService');
+import Supplier from '../models/Supplier.js';
+import notificationService from './notificationService.js';
 
 const createSupplier = async (supplierData) => {
     const supplier = new Supplier(supplierData);
@@ -26,7 +26,7 @@ const deleteSupplier = async (id) => {
     return supplier;
 };
 
-module.exports = {
+export default {
     createSupplier,
     getAllSuppliers,
     getSupplierById,

@@ -1,4 +1,4 @@
-const notificationService = require('../services/notificationService');
+import notificationService from '../services/notificationService.js';
 
 const getAllNotifications = async (req, res) => {
     try {
@@ -54,7 +54,7 @@ const checkLowStock = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     getAllNotifications,
     getUnreadNotifications,
     markAsRead,

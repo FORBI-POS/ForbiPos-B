@@ -1,4 +1,4 @@
-const employeeService = require('../services/employeeService');
+import employeeService from '../services/employeeService.js';
 
 const createEmployee = async (req, res) => {
     try {
@@ -48,7 +48,7 @@ const deleteEmployee = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createEmployee,
     getAllEmployees,
     getEmployeeById,

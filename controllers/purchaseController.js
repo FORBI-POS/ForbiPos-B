@@ -1,4 +1,4 @@
-const purchaseService = require('../services/purchaseService');
+import purchaseService from '../services/purchaseService.js';
 
 const createPurchase = async (req, res) => {
     try {
@@ -37,7 +37,7 @@ const deletePurchase = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createPurchase,
     getAllPurchases,
     getPurchaseById,

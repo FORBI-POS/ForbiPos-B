@@ -1,7 +1,8 @@
-const Invoice = require('../models/Invoice');
-const Product = require('../models/Product');
-const Customer = require('../models/Customer');
-const notificationService = require('./notificationService');
+import Invoice from '../models/Invoice.js';
+import Product from '../models/Product.js';
+import Customer from '../models/Customer.js';
+import notificationService from './notificationService.js';
+import Settings from '../models/Settings.js';
 
 const createInvoice = async (invoiceData) => {
     try {
@@ -17,7 +18,6 @@ const createInvoice = async (invoiceData) => {
         }
 
         // Calculate credit points based on settings
-        const Settings = require('../models/Settings');
         let settings = await Settings.findOne();
         if (!settings) {
             settings = await Settings.create({});
@@ -81,7 +81,6 @@ const deleteInvoice = async (id) => {
 
         // Reverse customer stats
         if (invoice.customer) {
-            const Settings = require('../models/Settings');
             let settings = await Settings.findOne();
             const creditPointsToRemove = settings ? Math.floor(invoice.grandTotal / settings.creditPointsPerAmount) : 0;
 
@@ -118,7 +117,7 @@ const deleteInvoice = async (id) => {
     }
 };
 
-module.exports = {
+export default {
     createInvoice,
     getAllInvoices,
     getInvoiceById,

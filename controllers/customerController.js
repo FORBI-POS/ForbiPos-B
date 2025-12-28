@@ -1,4 +1,4 @@
-const customerService = require('../services/customerService');
+import customerService from '../services/customerService.js';
 
 const createCustomer = async (req, res) => {
     try {
@@ -48,7 +48,7 @@ const deleteCustomer = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createCustomer,
     getAllCustomers,
     getCustomerById,

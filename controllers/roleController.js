@@ -1,8 +1,8 @@
-const Role = require('../models/Role');
-const User = require('../models/User');
+import Role from '../models/Role.js';
+import User from '../models/User.js';
 
 // Get all roles
-exports.getAllRoles = async (req, res) => {
+const getAllRoles = async (req, res) => {
     try {
         const roles = await Role.find().sort({ isDefault: -1, name: 1 });
         res.json(roles);
@@ -13,7 +13,7 @@ exports.getAllRoles = async (req, res) => {
 };
 
 // Get single role
-exports.getRole = async (req, res) => {
+const getRole = async (req, res) => {
     try {
         const role = await Role.findById(req.params.id);
         if (!role) {
@@ -27,7 +27,7 @@ exports.getRole = async (req, res) => {
 };
 
 // Create new role
-exports.createRole = async (req, res) => {
+const createRole = async (req, res) => {
     try {
         const { name, description, permissions } = req.body;
 
@@ -53,7 +53,7 @@ exports.createRole = async (req, res) => {
 };
 
 // Update role
-exports.updateRole = async (req, res) => {
+const updateRole = async (req, res) => {
     try {
         const role = await Role.findById(req.params.id);
 
@@ -89,7 +89,7 @@ exports.updateRole = async (req, res) => {
 };
 
 // Delete role
-exports.deleteRole = async (req, res) => {
+const deleteRole = async (req, res) => {
     try {
         const role = await Role.findById(req.params.id);
 
@@ -119,7 +119,7 @@ exports.deleteRole = async (req, res) => {
 };
 
 // Initialize default roles
-exports.initializeDefaultRoles = async () => {
+const initializeDefaultRoles = async () => {
     try {
         // Check if Admin role exists
         let adminRole = await Role.findOne({ name: 'Admin' });
@@ -162,3 +162,14 @@ exports.initializeDefaultRoles = async () => {
         console.error('Error initializing default roles:', error);
     }
 };
+
+export default {
+    getAllRoles,
+    getRole,
+    createRole,
+    updateRole,
+    deleteRole,
+    initializeDefaultRoles,
+};
+
+export { initializeDefaultRoles };

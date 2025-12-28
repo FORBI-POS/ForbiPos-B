@@ -1,6 +1,6 @@
-const reportService = require('../services/reportService');
+import reportService from '../services/reportService.js';
 
-exports.getReport = async (req, res) => {
+const getReport = async (req, res) => {
     try {
         const { type, startDate, endDate } = req.query;
         let result;
@@ -34,3 +34,5 @@ exports.getReport = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export default { getReport };

@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const expenseController = require('../controllers/expenseController');
+import expenseController from '../controllers/expenseController.js';
 
 router.post('/', expenseController.createExpense);
 router.get('/', expenseController.getAllExpenses);
@@ -8,4 +8,4 @@ router.get('/:id', expenseController.getExpenseById);
 router.put('/:id', expenseController.updateExpense);
 router.delete('/:id', expenseController.deleteExpense);
 
-module.exports = router;
+export default router;

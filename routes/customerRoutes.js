@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const customerController = require('../controllers/customerController');
+import customerController from '../controllers/customerController.js';
 
 router.post('/', customerController.createCustomer);
 router.get('/', customerController.getAllCustomers);
@@ -8,4 +8,4 @@ router.get('/:id', customerController.getCustomerById);
 router.put('/:id', customerController.updateCustomer);
 router.delete('/:id', customerController.deleteCustomer);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const Product = require('../models/Product');
-const notificationService = require('./notificationService');
+import Product from '../models/Product.js';
+import notificationService from './notificationService.js';
 
 const createProduct = async (productData) => {
     const product = new Product(productData);
@@ -26,7 +26,7 @@ const deleteProduct = async (id) => {
     return product;
 };
 
-module.exports = {
+export default {
     createProduct,
     getAllProducts,
     getProductById,

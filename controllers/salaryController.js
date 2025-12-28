@@ -1,5 +1,5 @@
-const Salary = require('../models/Salary');
-const Employee = require('../models/Employee');
+import Salary from '../models/Salary.js';
+import Employee from '../models/Employee.js';
 
 // Add new salary record
 const addSalary = async (req, res) => {
@@ -142,7 +142,7 @@ const deleteSalary = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     addSalary,
     getAllSalaries,
     getEmployeeSalaries,

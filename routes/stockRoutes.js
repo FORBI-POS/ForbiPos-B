@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const stockController = require('../controllers/stockController');
+import stockController from '../controllers/stockController.js';
 
 router.post('/adjust', stockController.adjustStock);
 router.get('/adjustments', stockController.getAdjustments);
 
-module.exports = router;
+export default router;

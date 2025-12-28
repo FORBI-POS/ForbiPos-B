@@ -1,5 +1,5 @@
-const Expense = require('../models/Expense');
-const notificationService = require('./notificationService');
+import Expense from '../models/Expense.js';
+import notificationService from './notificationService.js';
 
 const createExpense = async (expenseData) => {
     const expense = new Expense(expenseData);
@@ -26,7 +26,7 @@ const deleteExpense = async (id) => {
     return expense;
 };
 
-module.exports = {
+export default {
     createExpense,
     getAllExpenses,
     getExpenseById,

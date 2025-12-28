@@ -1,9 +1,9 @@
-const User = require('../models/User');
-const Role = require('../models/Role');
-const bcrypt = require('bcryptjs');
+import User from '../models/User.js';
+import Role from '../models/Role.js';
+import bcrypt from 'bcryptjs';
 
 // Get all users with their roles
-exports.getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         const users = await User.find().populate('role', 'name').select('-password');
         res.json(users);
@@ -14,7 +14,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Create new user
-exports.createUser = async (req, res) => {
+const createUser = async (req, res) => {
     try {
         const { username, password, roleId } = req.body;
 
@@ -46,7 +46,7 @@ exports.createUser = async (req, res) => {
 };
 
 // Update user
-exports.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const { username, password, roleId } = req.body;
         const user = await User.findById(req.params.id);
@@ -86,7 +86,7 @@ exports.updateUser = async (req, res) => {
 };
 
 // Delete user
-exports.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
@@ -101,4 +101,11 @@ exports.deleteUser = async (req, res) => {
         console.error('Error deleting user:', error);
         res.status(500).json({ message: error.message });
     }
+};
+
+export default {
+    getAllUsers,
+    createUser,
+    updateUser,
+    deleteUser,
 };

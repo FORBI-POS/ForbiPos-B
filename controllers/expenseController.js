@@ -1,4 +1,4 @@
-const expenseService = require('../services/expenseService');
+import expenseService from '../services/expenseService.js';
 
 const createExpense = async (req, res) => {
     try {
@@ -48,7 +48,7 @@ const deleteExpense = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createExpense,
     getAllExpenses,
     getExpenseById,

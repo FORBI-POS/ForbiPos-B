@@ -1,15 +1,15 @@
-const Product = require('../models/Product');
-const Customer = require('../models/Customer');
-const Supplier = require('../models/Supplier');
-const Invoice = require('../models/Invoice');
-const Purchase = require('../models/Purchase');
-const Employee = require('../models/Employee');
-const Expense = require('../models/Expense');
-const Settings = require('../models/Settings');
-const StockAdjustment = require('../models/StockAdjustment');
-const Notification = require('../models/Notification');
+import Product from '../models/Product.js';
+import Customer from '../models/Customer.js';
+import Supplier from '../models/Supplier.js';
+import Invoice from '../models/Invoice.js';
+import Purchase from '../models/Purchase.js';
+import Employee from '../models/Employee.js';
+import Expense from '../models/Expense.js';
+import Settings from '../models/Settings.js';
+import StockAdjustment from '../models/StockAdjustment.js';
+import Notification from '../models/Notification.js';
 
-exports.createBackup = async (req, res) => {
+export const createBackup = async (req, res) => {
     try {
         const data = {
             products: await Product.find(),
@@ -31,7 +31,7 @@ exports.createBackup = async (req, res) => {
     }
 };
 
-exports.restoreBackup = async (req, res) => {
+export const restoreBackup = async (req, res) => {
     try {
         const data = req.body;
         if (!data) return res.status(400).json({ message: "No data provided" });
@@ -62,7 +62,7 @@ exports.restoreBackup = async (req, res) => {
     }
 };
 
-exports.resetDatabase = async (req, res) => {
+export const resetDatabase = async (req, res) => {
     try {
         await Product.deleteMany({});
         await Customer.deleteMany({});

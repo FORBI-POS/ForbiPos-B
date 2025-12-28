@@ -6,6 +6,12 @@
       "use": "@vercel/node"
     }
   ],
+  "env": {
+    "MONGO_URL": "@mongo_url",
+    "CLIENT_URL": "@client_url",
+    "JWT_SECRET": "@jwt_secret",
+    "NODE_ENV": "production"
+  },
   "routes": [
     {
       "src": "/(.*)",

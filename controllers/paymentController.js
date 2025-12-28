@@ -1,5 +1,5 @@
-const Invoice = require('../models/Invoice');
-const Customer = require('../models/Customer');
+import Invoice from '../models/Invoice.js';
+import Customer from '../models/Customer.js';
 
 const getReceivables = async (req, res) => {
     try {
@@ -113,7 +113,7 @@ const recordPayment = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     getReceivables,
     recordPayment,
 };

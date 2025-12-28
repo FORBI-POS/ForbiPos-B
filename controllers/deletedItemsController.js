@@ -1,9 +1,9 @@
-const Invoice = require('../models/Invoice');
-const Product = require('../models/Product');
-const Customer = require('../models/Customer');
-const Supplier = require('../models/Supplier');
-const Employee = require('../models/Employee');
-const Expense = require('../models/Expense');
+import Invoice from '../models/Invoice.js';
+import Product from '../models/Product.js';
+import Customer from '../models/Customer.js';
+import Supplier from '../models/Supplier.js';
+import Employee from '../models/Employee.js';
+import Expense from '../models/Expense.js';
 
 const getAllDeleted = async (req, res) => {
     try {
@@ -98,7 +98,7 @@ const permanentDelete = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     getAllDeleted,
     restoreItem,
     permanentDelete,

@@ -32,14 +32,20 @@ Create a `.env` file in the root directory with your database and application se
 
 ### Running the Server
 
-```bash
-npm start
+Note: `server.js` now **exports the Express `app` only** (no internal listener) to support serverless deployments (e.g., Vercel). For local development you can create a small entry file (e.g., `local-server.js`) that imports the app and starts the listener:
+
+```js
+// local-server.js
+import app from './server.js';
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
 ```
 
-For development with auto-reload:
+Then run:
 
 ```bash
-npm run dev
+node local-server.js
+# or use nodemon for dev: nodemon local-server.js
 ```
 
 ## API Routes
@@ -71,6 +77,18 @@ npm run dev
 ├── db.js          # Database connection
 └── server.js      # Entry point
 ```
+
+## Vercel deployment
+
+Before deploying to Vercel, add the required environment variables in your Vercel dashboard (Project Settings → Environment Variables):
+
+- `MONGO_URL` — your MongoDB connection string
+- `CLIENT_URL` — frontend origin (e.g., `https://forbi-pos.vercel.app`)
+- `JWT_SECRET` — secret used to sign JWT tokens
+
+You can either add them manually or store them as Vercel secrets and reference them in `vercel.json` (see placeholders already added).
+
+---
 
 ## License
 

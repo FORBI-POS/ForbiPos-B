@@ -1,76 +1,63 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./db');
-const cookieParser = require('cookie-parser');
-const { initializeDefaultRoles } = require('./controllers/roleController');
-const http = require('http');
-const { Server } = require('socket.io');
-const notificationService = require('./services/notificationService');
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import connectDB from './db.js';
+import cookieParser from 'cookie-parser';
+import { initializeDefaultRoles } from './controllers/roleController.js';
+// Note: Socket.IO and explicit HTTP server were removed to support serverless deployments.
+// If real-time sockets are needed, initialize Socket.IO in a dedicated server entrypoint.
 
-// Connect to database
-connectDB();
-
-
-// Initialize default roles
-initializeDefaultRoles();
+// Route imports
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import customerRoutes from './routes/customerRoutes.js';
+import supplierRoutes from './routes/supplierRoutes.js';
+import invoiceRoutes from './routes/invoiceRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
+import settingsRoutes from './routes/settingsRoutes.js';
+import purchaseRoutes from './routes/purchaseRoutes.js';
+import stockRoutes from './routes/stockRoutes.js';
+import expenseRoutes from './routes/expenseRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import backupRoutes from './routes/backupRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
+import roleRoutes from './routes/roleRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
+import deletedItemsRoutes from './routes/deletedItemsRoutes.js';
+import salaryRoutes from './routes/salaryRoutes.js';
+import http from "http"
 
 const app = express();
-const server = http.createServer(app);
-
-const io = new Server(server, {
-    cors: {
-        origin: ['http://localhost:5173', 'http://localhost:8080', 'https://forbi-pos.vercel.app'],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true
-    }
-});
-
-// Initialize socket in notification service
-notificationService.setSocketIo(io);
-
-io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
-
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
-    });
-});
-
 // Middleware
 app.use(cors({
     origin:process.env.CLIENT_URL,
 
-    credentials: true, // Allow cookies
+    credentials: true, 
 }));
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/products', require('./routes/productRoutes'));
-app.use('/api/customers', require('./routes/customerRoutes'));
-app.use('/api/suppliers', require('./routes/supplierRoutes'));
-app.use('/api/invoices', require('./routes/invoiceRoutes'));
-app.use('/api/employees', require('./routes/employeeRoutes'));
-app.use('/api/settings', require('./routes/settingsRoutes'));
-app.use('/api/purchases', require('./routes/purchaseRoutes'));
-app.use('/api/stock', require('./routes/stockRoutes'));
-app.use('/api/expenses', require('./routes/expenseRoutes'));
-app.use('/api/dashboard', require('./routes/dashboardRoutes'));
-app.use('/api/notifications', require('./routes/notificationRoutes'));
-app.use('/api/backup', require('./routes/backupRoutes'));
-app.use('/api/reports', require('./routes/reportRoutes'));
-app.use('/api/roles', require('./routes/roleRoutes'));
-app.use('/api/users', require('./routes/userRoutes'));
-app.use('/api/payments', require('./routes/paymentRoutes'));
-app.use('/api/deleted', require('./routes/deletedItemsRoutes'));
-app.use('/api/salaries', require('./routes/salaryRoutes'));
-
-// const PORT = process.env.PORT || 5000;
-
-// server.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/customers', customerRoutes);
+app.use('/api/suppliers', supplierRoutes);
+app.use('/api/invoices', invoiceRoutes);
+app.use('/api/employees', employeeRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/purchases', purchaseRoutes);
+app.use('/api/stock', stockRoutes);
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/backup', backupRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/roles', roleRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/deleted', deletedItemsRoutes);
+app.use('/api/salaries', salaryRoutes);
 
 export default app;

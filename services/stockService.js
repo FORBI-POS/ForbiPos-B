@@ -1,5 +1,5 @@
-const StockAdjustment = require('../models/StockAdjustment');
-const Product = require('../models/Product');
+import StockAdjustment from '../models/StockAdjustment.js';
+import Product from '../models/Product.js';
 
 const adjustStock = async (adjustmentData) => {
     const session = await StockAdjustment.startSession();
@@ -42,7 +42,7 @@ const getAdjustments = async () => {
     return await StockAdjustment.find().populate('product', 'name barcode').sort({ date: -1 });
 };
 
-module.exports = {
+export default {
     adjustStock,
     getAdjustments,
 };

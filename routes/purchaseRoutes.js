@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const purchaseController = require('../controllers/purchaseController');
+import purchaseController from '../controllers/purchaseController.js';
 
 router.post('/', purchaseController.createPurchase);
 router.get('/', purchaseController.getAllPurchases);
 router.get('/:id', purchaseController.getPurchaseById);
 router.delete('/:id', purchaseController.deletePurchase);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const Notification = require('../models/Notification');
-const Product = require('../models/Product');
+import Notification from '../models/Notification.js';
+import Product from '../models/Product.js';
 
 let io;
 
@@ -76,7 +76,7 @@ const notifyItemDeleted = async (modelName, itemName, relatedId) => {
     });
 };
 
-module.exports = {
+export default {
     createNotification,
     getAllNotifications,
     getUnreadNotifications,

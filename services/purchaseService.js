@@ -1,6 +1,6 @@
-const Purchase = require('../models/Purchase');
-const Product = require('../models/Product');
-const Supplier = require('../models/Supplier');
+import Purchase from '../models/Purchase.js';
+import Product from '../models/Product.js';
+import Supplier from '../models/Supplier.js';
 
 const createPurchase = async (purchaseData) => {
     const session = await Purchase.startSession();
@@ -105,7 +105,7 @@ const deletePurchase = async (id) => {
     }
 };
 
-module.exports = {
+export default {
     createPurchase,
     getAllPurchases,
     getPurchaseById,

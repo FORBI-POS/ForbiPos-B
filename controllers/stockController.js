@@ -1,4 +1,4 @@
-const stockService = require('../services/stockService');
+import stockService from '../services/stockService.js';
 
 const adjustStock = async (req, res) => {
     try {
@@ -18,7 +18,7 @@ const getAdjustments = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     adjustStock,
     getAdjustments,
 };

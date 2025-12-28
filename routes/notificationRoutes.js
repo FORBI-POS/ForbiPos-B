@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const notificationController = require('../controllers/notificationController');
+import notificationController from '../controllers/notificationController.js';
 
 router.get('/', notificationController.getAllNotifications);
 router.get('/unread', notificationController.getUnreadNotifications);
@@ -9,4 +9,4 @@ router.put('/read-all', notificationController.markAllAsRead);
 router.delete('/:id', notificationController.deleteNotification);
 router.post('/check-low-stock', notificationController.checkLowStock);
 
-module.exports = router;
+export default router;

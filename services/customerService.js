@@ -1,5 +1,5 @@
-const Customer = require('../models/Customer');
-const notificationService = require('./notificationService');
+import Customer from '../models/Customer.js';
+import notificationService from './notificationService.js';
 
 const createCustomer = async (customerData) => {
     const customer = new Customer(customerData);
@@ -26,7 +26,7 @@ const deleteCustomer = async (id) => {
     return customer;
 };
 
-module.exports = {
+export default {
     createCustomer,
     getAllCustomers,
     getCustomerById,

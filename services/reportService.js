@@ -1,8 +1,8 @@
-const Invoice = require('../models/Invoice');
-const Expense = require('../models/Expense');
-const Product = require('../models/Product');
-const Customer = require('../models/Customer');
-const Purchase = require('../models/Purchase');
+import Invoice from '../models/Invoice.js';
+import Expense from '../models/Expense.js';
+import Product from '../models/Product.js';
+import Customer from '../models/Customer.js';
+import Purchase from '../models/Purchase.js';
 
 const getSalesSummary = async (startDate, endDate) => {
     const query = {};
@@ -186,7 +186,7 @@ const getPurchaseSummary = async (startDate, endDate) => {
     };
 };
 
-module.exports = {
+export default {
     getSalesSummary,
     getSalesByItem,
     getSalesByCustomer,

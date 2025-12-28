@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const invoiceController = require('../controllers/invoiceController');
+import invoiceController from '../controllers/invoiceController.js';
 
 router.post('/', invoiceController.createInvoice);
 router.get('/', invoiceController.getAllInvoices);
 router.get('/:id', invoiceController.getInvoiceById);
 router.delete('/:id', invoiceController.deleteInvoice);
 
-module.exports = router;
+export default router;

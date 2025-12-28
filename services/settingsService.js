@@ -1,4 +1,4 @@
-const Settings = require('../models/Settings');
+import Settings from '../models/Settings.js';
 
 const getSettings = async () => {
     let settings = await Settings.findOne();
@@ -23,7 +23,7 @@ const updateSettings = async (settingsData) => {
     return settings;
 };
 
-module.exports = {
+export default {
     getSettings,
     updateSettings,
 };

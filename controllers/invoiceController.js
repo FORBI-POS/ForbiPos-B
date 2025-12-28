@@ -1,4 +1,4 @@
-const invoiceService = require('../services/invoiceService');
+import invoiceService from '../services/invoiceService.js';
 
 const createInvoice = async (req, res) => {
     try {
@@ -37,7 +37,7 @@ const deleteInvoice = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createInvoice,
     getAllInvoices,
     getInvoiceById,

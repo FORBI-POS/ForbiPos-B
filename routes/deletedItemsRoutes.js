@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const deletedItemsController = require('../controllers/deletedItemsController');
+import deletedItemsController from '../controllers/deletedItemsController.js';
 
 router.get('/', deletedItemsController.getAllDeleted);
 router.put('/:model/:id/restore', deletedItemsController.restoreItem);
 router.delete('/:model/:id', deletedItemsController.permanentDelete);
 
-module.exports = router;
+export default router;

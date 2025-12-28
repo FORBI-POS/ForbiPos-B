@@ -1,4 +1,4 @@
-const supplierService = require('../services/supplierService');
+import supplierService from '../services/supplierService.js';
 
 const createSupplier = async (req, res) => {
     try {
@@ -48,7 +48,7 @@ const deleteSupplier = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     createSupplier,
     getAllSuppliers,
     getSupplierById,

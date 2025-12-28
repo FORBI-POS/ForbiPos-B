@@ -1,7 +1,7 @@
-const Invoice = require('../models/Invoice');
-const Expense = require('../models/Expense');
-const Product = require('../models/Product');
-const Customer = require('../models/Customer');
+import Invoice from '../models/Invoice.js';
+import Expense from '../models/Expense.js';
+import Product from '../models/Product.js';
+import Customer from '../models/Customer.js';
 
 const getDashboardStats = async () => {
     // 1. Total Revenue (Sum of all completed invoices)
@@ -127,6 +127,6 @@ const getDashboardStats = async () => {
     };
 };
 
-module.exports = {
+export default {
     getDashboardStats
 };

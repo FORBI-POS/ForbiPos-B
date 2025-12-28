@@ -1,5 +1,5 @@
-const Employee = require('../models/Employee');
-const notificationService = require('./notificationService');
+import Employee from '../models/Employee.js';
+import notificationService from './notificationService.js';
 
 const createEmployee = async (employeeData) => {
     const employee = new Employee(employeeData);
@@ -26,7 +26,7 @@ const deleteEmployee = async (id) => {
     return employee;
 };
 
-module.exports = {
+export default {
     createEmployee,
     getAllEmployees,
     getEmployeeById,
