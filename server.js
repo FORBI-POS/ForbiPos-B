@@ -27,7 +27,6 @@ import userRoutes from './routes/userRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import deletedItemsRoutes from './routes/deletedItemsRoutes.js';
 import salaryRoutes from './routes/salaryRoutes.js';
-import http from "http"
 
 const app = express();
 // Middleware
@@ -61,3 +60,26 @@ app.use('/api/deleted', deletedItemsRoutes);
 app.use('/api/salaries', salaryRoutes);
 
 export default app;
+
+// If this file is executed directly (e.g., `node server.js`), perform startup tasks
+// and start an HTTP listener. This keeps `server.js` serverless-friendly when imported,
+// but allows running as a standalone server in environments (like Render) that expect it.
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const entryPointPath = process.argv[1] ? path.resolve(process.argv[1]) : null;
+const thisFile = fileURLToPath(import.meta.url);
+
+if (entryPointPath === thisFile) {
+  (async () => {
+    try {
+      await connectDB();
+      await initializeDefaultRoles();
+      const PORT = process.env.PORT || 5000;
+      app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+    } catch (err) {
+      console.error('Startup error:', err.message || err);
+      process.exit(1);
+    }
+  })();
+}
